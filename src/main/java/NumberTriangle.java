@@ -113,7 +113,7 @@ public class NumberTriangle {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
         int linecount = 0;
-        TreeSet<int[]> processedData = new TreeSet();
+        TreeSet<NumberTriangle[]> processedData = new TreeSet();
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -127,10 +127,11 @@ public class NumberTriangle {
 
             linecount = linecount + 1;
 
-            int[] processedLine = new int[linecount];
+            NumberTriangle[] processedLine = new NumberTriangle[linecount];
 
             for (int i = 0; i < linecount; i++) {
-                processedLine[i] = Integer.parseInt(line.substring(2 * i, 2 * i + 2));
+
+                processedLine[i] = new NumberTriangle(Integer.parseInt(line.substring(2 * i, 2 * i + 2)));
             }
 
             processedData.add(processedLine);
