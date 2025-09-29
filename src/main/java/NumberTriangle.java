@@ -1,4 +1,8 @@
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * This is the provided NumberTriangle class to be used in this coding task.
@@ -41,7 +45,6 @@ public class NumberTriangle {
     public void setLeft(NumberTriangle left) {
         this.left = left;
     }
-
 
     public void setRight(NumberTriangle right) {
         this.right = right;
@@ -109,8 +112,8 @@ public class NumberTriangle {
         InputStream inputStream = NumberTriangle.class.getClassLoader().getResourceAsStream(fname);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
-
-        // TODO define any variables that you want to use to store things
+        int linecount = 0;
+        TreeSet<int[]> processedData = new TreeSet();
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -122,13 +125,41 @@ public class NumberTriangle {
             // remove when done; this line is included so running starter code prints the contents of the file
             System.out.println(line);
 
-            // TODO process the line
+            linecount = linecount + 1;
+
+            int[] processedLine = new int[linecount];
+
+            for (int i = 0; i < linecount; i++) {
+                processedLine[i] = Integer.parseInt(line.substring(2 * i, 2 * i + 2));
+            }
+
+            processedData.add(processedLine);
 
             //read the next line
             line = br.readLine();
         }
         br.close();
+
+        for (int i = 0; i < processedData.size(); i++) {
+            buildTriangle(/* top, subset of TreeSet containing the current level and the one below it */);
+        }
+
         return top;
+    }
+
+    /**
+     * Helper function to loadTriangle which builds the NumberTriangle from processed data (inverted to have the
+     * lowest level of the NumberTriangle first).
+     * @param triangle the NumberTriangle to be built
+     * @param dataSubset the processed data obtained from loadTriangle
+     * @return the NumberTriangle generated from the processed data
+     */
+    public static NumberTriangle buildTriangle(NumberTriangle triangle, SortedSet<int[]> dataSubset) {
+        Iterator subsetIterator = dataSubset.iterator();
+
+        // TODO: complete this method
+
+        return triangle;
     }
 
     public static void main(String[] args) throws IOException {
