@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * This is the provided NumberTriangle class to be used in this coding task.
@@ -41,7 +42,6 @@ public class NumberTriangle {
     public void setLeft(NumberTriangle left) {
         this.left = left;
     }
-
 
     public void setRight(NumberTriangle right) {
         this.right = right;
@@ -109,8 +109,8 @@ public class NumberTriangle {
         InputStream inputStream = NumberTriangle.class.getClassLoader().getResourceAsStream(fname);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
-
-        // TODO define any variables that you want to use to store things
+        int linecount = 0;
+        ArrayList<NumberTriangle[]> processedData = new ArrayList();
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -119,16 +119,45 @@ public class NumberTriangle {
         String line = br.readLine();
         while (line != null) {
 
-            // remove when done; this line is included so running starter code prints the contents of the file
-            System.out.println(line);
+            linecount = linecount + 1;
 
-            // TODO process the line
+            NumberTriangle[] processedLine = new NumberTriangle[linecount];
+
+            for (int i = 0; i < linecount; i++) {
+
+                processedLine[i] = new NumberTriangle(Integer.parseInt(line.substring(3 * i, 3 * i + 2)));
+            }
+
+            processedData.add(processedLine);
 
             //read the next line
             line = br.readLine();
         }
         br.close();
+
+        // connecting all NumberTriangles together
+        for (int i = 0; i < processedData.size() - 1; i++) {
+            connectTriangles(processedData.get(i), processedData.get(i + 1), i);
+        }
+
+        top = processedData.get(0)[0];
+
         return top;
+    }
+
+    /**
+     * Helper function to loadTriangle which connects the NumberTriangles from processed data.
+     * @param topTriangles array of the NumberTriangles at the top (parents of bottomTriangles)
+     * @param bottomTriangles array of the NumberTriangles at the bottom (children of topTriangles)
+     * @param topIndex the highest index in topTriangles
+     * @return the NumberTriangle generated from the processed data
+     */
+
+    public static void connectTriangles(NumberTriangle[] topTriangles, NumberTriangle[] bottomTriangles, int topIndex) {
+        for (int index = 0; index <= topIndex; index++) {
+            topTriangles[index].setLeft(bottomTriangles[index]);
+            topTriangles[index].setRight(bottomTriangles[index + 1]);
+        }
     }
 
     public static void main(String[] args) throws IOException {
