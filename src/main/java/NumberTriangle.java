@@ -89,7 +89,7 @@ public class NumberTriangle {
      */
     public int retrieve(String path) {
         // path provided is empty
-        if (path == null) {
+        if (path == null || path.isEmpty()) {
             return this.root;
         }
 
