@@ -119,16 +119,13 @@ public class NumberTriangle {
         String line = br.readLine();
         while (line != null) {
 
-            // remove when done; this line is included so running starter code prints the contents of the file
-            System.out.println(line);
-
             linecount = linecount + 1;
 
             NumberTriangle[] processedLine = new NumberTriangle[linecount];
 
             for (int i = 0; i < linecount; i++) {
 
-                processedLine[i] = new NumberTriangle(Integer.parseInt(line.substring(2 * i, 2 * i + 2)));
+                processedLine[i] = new NumberTriangle(Integer.parseInt(line.substring(3 * i, 3 * i + 2)));
             }
 
             processedData.add(processedLine);
@@ -138,26 +135,29 @@ public class NumberTriangle {
         }
         br.close();
 
-        for (int i = 0; i < processedData.size(); i++) {
-            buildTriangle(/* top, subset of TreeSet containing the current level and the one below it */);
+        // connecting all NumberTriangles together
+        for (int i = 0; i < processedData.size() - 1; i++) {
+            connectTriangles(processedData.get(i), processedData.get(i + 1), i);
         }
+
+        top = processedData.get(0)[0];
 
         return top;
     }
 
     /**
-     * Helper function to loadTriangle which builds the NumberTriangle from processed data (inverted to have the
-     * lowest level of the NumberTriangle first).
-     * @param triangle the NumberTriangle to be built
-     * @param dataSubset the processed data obtained from loadTriangle
+     * Helper function to loadTriangle which connects the NumberTriangles from processed data.
+     * @param topTriangles array of the NumberTriangles at the top (parents of bottomTriangles)
+     * @param bottomTriangles array of the NumberTriangles at the bottom (children of topTriangles)
+     * @param topIndex the highest index in topTriangles
      * @return the NumberTriangle generated from the processed data
      */
-    public static NumberTriangle buildTriangle(NumberTriangle triangle, ArrayList<NumberTriangle[]> dataSubset) {
 
-
-        // TODO: complete this method
-
-        return triangle;
+    public static void connectTriangles(NumberTriangle[] topTriangles, NumberTriangle[] bottomTriangles, int topIndex) {
+        for (int index = 0; index <= topIndex; index++) {
+            topTriangles[index].setLeft(bottomTriangles[index]);
+            topTriangles[index].setRight(bottomTriangles[index + 1]);
+        }
     }
 
     public static void main(String[] args) throws IOException {
