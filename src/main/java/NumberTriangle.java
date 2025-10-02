@@ -124,12 +124,17 @@ public class NumberTriangle {
         int linecount = 0;
         ArrayList<NumberTriangle[]> processedData = new ArrayList<>();
 
+
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
         NumberTriangle top;
 
         String line = br.readLine();
+
         while (line != null) {
+
+            // Split line by space to get all values in an array
+            String[] splitString = line.split(" ");
 
             linecount = linecount + 1;
 
@@ -137,7 +142,7 @@ public class NumberTriangle {
 
             for (int i = 0; i < linecount; i++) {
 
-                processedLine[i] = new NumberTriangle(Integer.parseInt(line.substring(3 * i, 3 * i + 2)));
+                processedLine[i] = new NumberTriangle(Integer.parseInt(splitString[i]));
             }
 
             processedData.add(processedLine);
