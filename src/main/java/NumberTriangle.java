@@ -162,7 +162,6 @@ public class NumberTriangle {
      * @param topTriangles array of the NumberTriangles at the top (parents of bottomTriangles)
      * @param bottomTriangles array of the NumberTriangles at the bottom (children of topTriangles)
      * @param topIndex the highest index in topTriangles
-     * @return the NumberTriangle generated from the processed data
      */
 
     public static void connectTriangles(NumberTriangle[] topTriangles, NumberTriangle[] bottomTriangles, int topIndex) {
