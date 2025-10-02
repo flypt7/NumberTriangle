@@ -1,8 +1,5 @@
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 /**
  * This is the provided NumberTriangle class to be used in this coding task.
@@ -113,7 +110,7 @@ public class NumberTriangle {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
         int linecount = 0;
-        TreeSet<NumberTriangle[]> processedData = new TreeSet();
+        ArrayList<NumberTriangle[]> processedData = new ArrayList();
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -155,8 +152,8 @@ public class NumberTriangle {
      * @param dataSubset the processed data obtained from loadTriangle
      * @return the NumberTriangle generated from the processed data
      */
-    public static NumberTriangle buildTriangle(NumberTriangle triangle, SortedSet<int[]> dataSubset) {
-        Iterator subsetIterator = dataSubset.iterator();
+    public static NumberTriangle buildTriangle(NumberTriangle triangle, ArrayList<NumberTriangle[]> dataSubset) {
+
 
         // TODO: complete this method
 
